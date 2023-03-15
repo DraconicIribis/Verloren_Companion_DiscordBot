@@ -32,7 +32,7 @@ namespace Verloren_Companion_Bot
                 .AddSingleton<DreamEvents>()
                 .BuildServiceProvider();
 
-            String token = "Njg2NjM4ODAzOTU1NjEzNzQw.Xmaafw.yZ5LCeZQG4HTcTuxeWDtRxExyCg";
+            String token = "NEEDS TO BE RESET";
 
             await _client.SetGameAsync("\"V-help\" for help!");
 
