@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Verloren_Companion_Bot
 {
-    class DreamEvents
+    class LycanEvents
     {
-        public async Task<string[][]> getDreamEvents()
+        public async Task<string[][]> getLycanEvents()
         {
             string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
             string ApplicationName = "Google Sheets API .NET Quickstart";
@@ -42,18 +42,20 @@ namespace Verloren_Companion_Bot
             });
 
             String spreadsheetId = "12ZDd5NJ27LHfamTqYGwosDm8hqvcoNoXVInNrWCRfI0";
-            String dreamRange = "Dream Events!B:D";
+            String lycanRange = "Lycanthrope Events!B:F";
             SpreadsheetsResource.ValuesResource.GetRequest request =
-                    service.Spreadsheets.Values.Get(spreadsheetId, dreamRange);
+                    service.Spreadsheets.Values.Get(spreadsheetId, lycanRange);
 
             ValueRange response = request.Execute();
             IList<IList<Object>> values = response.Values;
 
-            string[][] jaggedDeep = new string[3][];
+            string[][] jaggedSeverity = new string[5][];
 
             List<string> severity0 = new List<string>();
             List<string> severity1 = new List<string>();
             List<string> severity2 = new List<string>();
+            List<string> severity3 = new List<string>();
+            List<string> severity4 = new List<string>();
 
             if (values != null && values.Count > 0)
             {
@@ -62,6 +64,8 @@ namespace Verloren_Companion_Bot
                     severity0.Add(row[0].ToString());
                     severity1.Add(row[1].ToString());
                     severity2.Add(row[2].ToString());
+                    severity3.Add(row[3].ToString());
+                    severity4.Add(row[4].ToString());
                 }
             }
             else
@@ -72,12 +76,17 @@ namespace Verloren_Companion_Bot
             string[] severity0A = severity0.ToArray();
             string[] severity1A = severity1.ToArray();
             string[] severity2A = severity2.ToArray();
+            string[] severity3A = severity3.ToArray();
+            string[] severity4A = severity4.ToArray();
 
-            jaggedDeep[0] = severity0A;
-            jaggedDeep[1] = severity1A;
-            jaggedDeep[2] = severity2A;
+            jaggedSeverity[0] = severity0A;
+            jaggedSeverity[1] = severity1A;
+            jaggedSeverity[2] = severity2A;
+            jaggedSeverity[3] = severity3A;
+            jaggedSeverity[4] = severity4A;
+            
 
-            return jaggedDeep;
+            return jaggedSeverity;
         }
     }
 }
